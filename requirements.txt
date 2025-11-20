@@ -1,0 +1,5 @@
+streamlit
+crewai
+crew_tools
+langchain_openai
+openai
