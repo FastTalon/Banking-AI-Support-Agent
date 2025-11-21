@@ -156,7 +156,7 @@ if prompt := st.chat_input("How can we help you today?"):
                 agent=query_handler,
                 expected_output="Return ticket status."
             )
-            final_response = Crew(
+            final_response = str(Crew(
                 agents=[query_handler],
                 tasks=[query_task],
                 process=Process.sequential,
@@ -176,12 +176,12 @@ if prompt := st.chat_input("How can we help you today?"):
                 agent=feedback_handler,
                 expected_output="Apologize and include ticket number."
             )
-            final_response = Crew(
+            final_response = str(Crew(
                 agents=[feedback_handler],
                 tasks=[feedback_task],
                 process=Process.sequential,
                 verbose=False
-            ).kickoff()
+            ).kickoff()).strip()
 
         else:
             final_response = "I couldn't classify your request—please try again."
@@ -189,6 +189,7 @@ if prompt := st.chat_input("How can we help you today?"):
         status_box.empty()
         st.markdown(final_response)
         st.session_state.messages.append({"role": "assistant", "content": final_response})
+
 
 
 
