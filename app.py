@@ -161,7 +161,7 @@ if prompt := st.chat_input("How can we help you today?"):
                 tasks=[query_task],
                 process=Process.sequential,
                 verbose=False
-            ).kickoff()
+            ).kickoff()).strip()
 
         elif "Positive Feedback" in classification:
             status_box.info("Step 2: Generating thank-you message...")
@@ -189,4 +189,5 @@ if prompt := st.chat_input("How can we help you today?"):
         status_box.empty()
         st.markdown(final_response)
         st.session_state.messages.append({"role": "assistant", "content": final_response})
+
 
