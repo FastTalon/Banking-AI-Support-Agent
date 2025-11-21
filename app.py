@@ -134,7 +134,7 @@ if prompt := st.chat_input("How can we help you today?"):
             expected_output="Positive Feedback, Negative Feedback, or Query."
         )
 
-        classification = Crew(
+        classification = str(Crew(
             agents=[classifier],
             tasks=[classify_task],
             process=Process.sequential,
@@ -189,6 +189,7 @@ if prompt := st.chat_input("How can we help you today?"):
         status_box.empty()
         st.markdown(final_response)
         st.session_state.messages.append({"role": "assistant", "content": final_response})
+
 
 
 
