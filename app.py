@@ -139,7 +139,7 @@ if prompt := st.chat_input("How can we help you today?"):
             tasks=[classify_task],
             process=Process.sequential,
             verbose=False
-        ).kickoff().strip()
+        ).kickoff()).strip()
 
         status_box.info(f"Result: **{classification}**")
 
@@ -189,5 +189,6 @@ if prompt := st.chat_input("How can we help you today?"):
         status_box.empty()
         st.markdown(final_response)
         st.session_state.messages.append({"role": "assistant", "content": final_response})
+
 
 
