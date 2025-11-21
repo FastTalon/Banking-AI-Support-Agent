@@ -111,7 +111,7 @@ with st.sidebar:
 
 # Chat history
 for m in st.session_state.messages:
-    with st.chat_message(m["role"], icon="👤" if m["role"] == "user" else "🤖"):
+    with st.chat_message(m["role"]):
         st.markdown(m["content"])
 
 # -------------------------------
@@ -189,6 +189,7 @@ if prompt := st.chat_input("How can we help you today?"):
         status_box.empty()
         st.markdown(final_response)
         st.session_state.messages.append({"role": "assistant", "content": final_response})
+
 
 
 
