@@ -2,8 +2,17 @@ import streamlit as st
 import os
 import random
 import re
+# 🚨 CRITICAL FIX FOR SQLITE3/CHROMA CONFLICT 🚨
+# This hot-swaps the incompatible system 'sqlite3' with the
+# working version from 'pysqlite3-binary' (which is in requirements.txt).
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+# 🛠️ CRITICAL FIX FOR BASETOOL IMPORT PATH 🛠️
+# BaseTool moved from 'crewai_tools' to 'crewai' in newer versions.
 from crewai import Agent, Task, Crew, Process
-from crewai_tools import BaseTool
+from crewai.tools import BaseTool # <--- CHANGE THIS LINE!
 from langchain_openai import ChatOpenAI
 
 # -------------------------------
@@ -180,3 +189,4 @@ if prompt := st.chat_input("How can we help you today?"):
         status_box.empty()
         st.markdown(final_response)
         st.session_state.messages.append({"role": "assistant", "content": final_response})
+
